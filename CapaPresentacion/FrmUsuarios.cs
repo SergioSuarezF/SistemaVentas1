@@ -71,14 +71,42 @@ namespace CapaPresentacion
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            //dgvData.Rows.Add(new object[] {"", txtId.Text, txtDocumento.Text, txtNombreCompleto.Text, txtCorreo.Text, txtClave.Text,
-                //((OpcionCombo)cboRol.SelectedItem).Valor.ToString(),
-                //((OpcionCombo)cboRol.SelectedItem).Texto.ToString(),
-                //((OpcionCombo)cboEstado.SelectedItem).Valor.ToString(),
-                //((OpcionCombo)cboEstado.SelectedItem).Texto.ToString()
-            //});
+            string Mensaje = string.Empty;
 
-            //Limpiar();
+            Usuario objUsuario = new Usuario()
+            {
+                IdUsuario = Convert.ToInt32(txtId.Text),
+                Documento = txtDocumento.Text,
+                NombreCompleto = txtNombreCompleto.Text,
+                Correo = txtCorreo.Text,
+                Clave = txtClave.Text,
+                oRol = new Rol()
+                {
+                    IdRol = Convert.ToInt32(((OpcionCombo)cboRol.SelectedItem).Valor)
+                },
+                Estado = Convert.ToInt32(((OpcionCombo)cboEstado.SelectedItem).Valor) == 1 ? true : false
+            };
+
+            int IdUsuarioGenerado = new CN_Usuario().Registrar(objUsuario, out Mensaje);
+            
+            if (IdUsuarioGenerado != 0)
+            {
+                dgvData.Rows.Add(new object[] {"", IdUsuarioGenerado, txtDocumento.Text, txtNombreCompleto.Text, txtCorreo.Text, txtClave.Text,
+                    ((OpcionCombo)cboRol.SelectedItem).Valor.ToString(),
+                    ((OpcionCombo)cboRol.SelectedItem).Texto.ToString(),
+                    ((OpcionCombo)cboEstado.SelectedItem).Valor.ToString(),
+                    ((OpcionCombo)cboEstado.SelectedItem).Texto.ToString()
+                });
+
+                Limpiar();
+            }
+            else
+            {
+                MessageBox.Show(Mensaje);
+            }
+            
+
+            
         }
 
         private void Limpiar()
