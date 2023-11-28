@@ -106,7 +106,7 @@ namespace CapaDatos
 
         public bool Editar(Usuario obj, out string Mensaje)
         {
-            bool respuesta = false;
+            bool Respuesta = false;
             Mensaje = string.Empty;
 
             try
@@ -125,7 +125,7 @@ namespace CapaDatos
 
                     //Salida
                     cmd.Parameters.Add("Respuesta", SqlDbType.Int).Direction = ParameterDirection.Output;
-                    cmd.Parameters.Add("Mensaje", SqlDbType.VarChar).Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("Mensaje", SqlDbType.VarChar,500).Direction = ParameterDirection.Output;
 
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -133,24 +133,24 @@ namespace CapaDatos
 
                     cmd.ExecuteNonQuery();
 
-                    respuesta = Convert.ToBoolean(cmd.Parameters["IdUsuarioResultado"].Value);
+                    Respuesta = Convert.ToBoolean(cmd.Parameters["Respuesta"].Value);
                     Mensaje = cmd.Parameters["Mensaje"].Value.ToString();
 
                 }
             }
             catch (Exception ex)
             {
-                respuesta = false;
+                Respuesta = false;
                 Mensaje = ex.Message;
             }
 
-            return respuesta;
+            return Respuesta;
         }
 
 
         public bool Eliminar(Usuario obj, out string Mensaje)
         {
-            bool respuesta = false;
+            bool Respuesta = false;
             Mensaje = string.Empty;
 
             try
@@ -163,7 +163,7 @@ namespace CapaDatos
 
                     //Salida
                     cmd.Parameters.Add("Respuesta", SqlDbType.Int).Direction = ParameterDirection.Output;
-                    cmd.Parameters.Add("Mensaje", SqlDbType.VarChar).Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("Mensaje", SqlDbType.VarChar,500).Direction = ParameterDirection.Output;
 
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -171,18 +171,18 @@ namespace CapaDatos
 
                     cmd.ExecuteNonQuery();
 
-                    respuesta = Convert.ToBoolean(cmd.Parameters["IdUsuarioResultado"].Value);
+                    Respuesta = Convert.ToBoolean(cmd.Parameters["Respuesta"].Value);
                     Mensaje = cmd.Parameters["Mensaje"].Value.ToString();
 
                 }
             }
             catch (Exception ex)
             {
-                respuesta = false;
+                Respuesta = false;
                 Mensaje = ex.Message;
             }
 
-            return respuesta;
+            return Respuesta;
         }
 
 
