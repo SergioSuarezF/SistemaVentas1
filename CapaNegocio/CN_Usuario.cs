@@ -34,7 +34,7 @@ namespace CapaNegocio
 
             if (obj.Clave == "")
             {
-                Mensaje += "Se necesita la clave del usuario\n";
+                Mensaje += "Se necesita la Clave del usuario\n";
             }
 
             if (Mensaje != string.Empty)
