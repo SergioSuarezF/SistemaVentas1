@@ -1,27 +1,26 @@
-﻿using System;
-using System.Collections;
+﻿using CapaEntidad;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CapaEntidad;
 
 namespace CapaDatos
 {
-    public class CD_Cliente
+    public class CD_Proveedor
     {
-        public List<Cliente> Listar()
+        public List<Proveedor> Listar()
         {
-            List<Cliente> lista = new List<Cliente>();
-           
-            using (SqlConnection oConexion = new SqlConnection(Conexion.cadena))
+            List<Proveedor> lista = new List<Proveedor>();
+
+            using (SqlConnection oConexion  = new SqlConnection(Conexion.cadena))
             {
                 try
                 {
                     StringBuilder query = new StringBuilder();
-                    query.AppendLine("SELECT IdCliente, Documento, NombreCompleto, Correo, Telefono, Estado FROM CLIENTE");
+                    query.AppendLine("SELECT IdProveedor, Documento, RazonSocial, Correo, Telefono, Estado FROM PROVEEDOR");
 
                     SqlCommand cmd = new SqlCommand(query.ToString(), oConexion);
                     cmd.CommandType = CommandType.Text;
@@ -32,11 +31,11 @@ namespace CapaDatos
                     {
                         while (dr.Read())
                         {
-                            lista.Add(new Cliente()
+                            lista.Add(new Proveedor()
                             {
-                                IdCliente = Convert.ToInt32(dr["IdCliente"]),
+                                IdProveedor = Convert.ToInt32(dr["IdProveedor"]),
                                 Documento = dr["Documento"].ToString(),
-                                NombreCompleto = dr["NombreCompleto"].ToString(),
+                                RazonSocial = dr["RazonSocial"].ToString(),
                                 Correo = dr["Correo"].ToString(),
                                 Telefono = dr["Telefono"].ToString(),
                                 Estado = Convert.ToBoolean(dr["Estado"])
@@ -47,28 +46,30 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    lista = new List<Cliente>();
+                    lista = new List<Proveedor>();
                 }
+                
             }
+
             return lista;
         }
 
 
-        public int Registrar(Cliente objCliente, out string Mensaje)
+        public int Registrar(Proveedor obj, out string Mensaje)
         {
-            int IdClienteGenerado = 0;
+            int IdProveedorGenerado = 0;
             Mensaje = string.Empty;
 
             try
             {
                 using (SqlConnection oConexion = new SqlConnection(Conexion.cadena))
                 {
-                    SqlCommand cmd = new SqlCommand("SP_REGISTRARCLIENTE", oConexion);
-                    cmd.Parameters.AddWithValue("Documento", objCliente.Documento);
-                    cmd.Parameters.AddWithValue("NombreCompleto", objCliente.NombreCompleto);
-                    cmd.Parameters.AddWithValue("Correo", objCliente.Correo);
-                    cmd.Parameters.AddWithValue("Telefono", objCliente.Telefono);
-                    cmd.Parameters.AddWithValue("Estado", objCliente.Estado);
+                    SqlCommand cmd = new SqlCommand("SP_REGISTRARPROVEEDOR", oConexion);
+                    cmd.Parameters.AddWithValue("Documento", obj.Documento);
+                    cmd.Parameters.AddWithValue("RazonSocial", obj.RazonSocial);
+                    cmd.Parameters.AddWithValue("Correo", obj.Correo);
+                    cmd.Parameters.AddWithValue("Telefono", obj.Telefono);
+                    cmd.Parameters.AddWithValue("Estado", obj.Estado);
                     cmd.Parameters.Add("Resultado", SqlDbType.Int).Direction = ParameterDirection.Output;
                     cmd.Parameters.Add("Mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
 
@@ -78,21 +79,22 @@ namespace CapaDatos
 
                     cmd.ExecuteNonQuery();
 
-                    IdClienteGenerado = Convert.ToInt32(cmd.Parameters["Resultado"].Value);
+                    IdProveedorGenerado = Convert.ToInt32(cmd.Parameters["Resultado"].Value);
                     Mensaje = cmd.Parameters["Mensaje"].Value.ToString();
-                    
+
+
                 }
             }
             catch (Exception ex)
             {
-                IdClienteGenerado = 0;
+                IdProveedorGenerado = 0;
                 Mensaje = ex.Message;
             }
-            return IdClienteGenerado;
+            return IdProveedorGenerado;
         }
 
 
-        public bool Editar(Cliente objCliente, out string Mensaje)
+        public bool Editar(Proveedor obj, out string Mensaje)
         {
             bool respuesta = false;
             Mensaje = string.Empty;
@@ -101,13 +103,13 @@ namespace CapaDatos
             {
                 using (SqlConnection oConexion = new SqlConnection(Conexion.cadena))
                 {
-                    SqlCommand cmd = new SqlCommand("SP_EDITARCLIENTE", oConexion);
-                    cmd.Parameters.AddWithValue("IdCliente", objCliente.IdCliente);
-                    cmd.Parameters.AddWithValue("Documento", objCliente.Documento);
-                    cmd.Parameters.AddWithValue("NombreCompleto", objCliente.NombreCompleto);
-                    cmd.Parameters.AddWithValue("Correo", objCliente.Correo);
-                    cmd.Parameters.AddWithValue("Telefono", objCliente.Telefono);
-                    cmd.Parameters.AddWithValue("Estado", objCliente.Estado);
+                    SqlCommand cmd = new SqlCommand("SP_EDITARPROVEEDOR", oConexion);
+                    cmd.Parameters.AddWithValue("IdProveedor", obj.IdProveedor);
+                    cmd.Parameters.AddWithValue("Documento", obj.Documento);
+                    cmd.Parameters.AddWithValue("RazonSocial", obj.RazonSocial);
+                    cmd.Parameters.AddWithValue("Correo", obj.Correo);
+                    cmd.Parameters.AddWithValue("Telefono", obj.Telefono);
+                    cmd.Parameters.AddWithValue("Estado", obj.Estado);
                     cmd.Parameters.Add("Resultado", SqlDbType.Int).Direction = ParameterDirection.Output;
                     cmd.Parameters.Add("Mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
 
@@ -119,7 +121,6 @@ namespace CapaDatos
 
                     respuesta = Convert.ToBoolean(cmd.Parameters["Resultado"].Value);
                     Mensaje = cmd.Parameters["Mensaje"].Value.ToString();
-
                 }
             }
             catch (Exception ex)
@@ -128,10 +129,10 @@ namespace CapaDatos
                 Mensaje = ex.Message;
             }
             return respuesta;
-
         }
 
-        public bool Eliminar(Cliente objCliente, out string Mensaje)
+
+        public bool Eliminar(Proveedor obj, out string Mensaje)
         {
             bool respuesta = false;
             Mensaje = string.Empty;
@@ -140,18 +141,19 @@ namespace CapaDatos
             {
                 using (SqlConnection oConexion = new SqlConnection(Conexion.cadena))
                 {
-                    SqlCommand cmd = new SqlCommand("SP_ELIMINARCLIENTE", oConexion);
-                    cmd.Parameters.AddWithValue("IdCliente", objCliente.IdCliente);
+                    SqlCommand cmd = new SqlCommand("SP_ELIMINARPROVEEDOR", oConexion);
+                    cmd.Parameters.AddWithValue("IdProveedor", obj.IdProveedor);
+                    cmd.Parameters.Add("Resultado", SqlDbType.Int).Direction = ParameterDirection.Output;
                     cmd.Parameters.Add("Mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
 
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     oConexion.Open();
 
-                    respuesta = cmd.ExecuteNonQuery() > 0 ? true : false;
+                    cmd.ExecuteNonQuery();
 
+                    respuesta = Convert.ToBoolean(cmd.Parameters["Resultado"].Value);
                     Mensaje = cmd.Parameters["Mensaje"].Value.ToString();
-
                 }
             }
             catch (Exception ex)
@@ -160,12 +162,7 @@ namespace CapaDatos
                 Mensaje = ex.Message;
             }
             return respuesta;
-
         }
-        
-
-        
-
 
     }
 }

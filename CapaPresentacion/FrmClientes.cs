@@ -50,7 +50,7 @@ namespace CapaPresentacion
             {
                 dgvData.Rows.Add(new object[] {"", item.IdCliente, item.Documento, item.NombreCompleto, item.Correo, item.Telefono,
                     item.Estado == true ? 1 : 0,
-                    item.Estado == false ? "Activo" : "No activo"
+                    item.Estado == true ? "Activo" : "No activo"
 
                 });
             }
