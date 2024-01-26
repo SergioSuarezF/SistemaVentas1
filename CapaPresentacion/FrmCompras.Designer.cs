@@ -65,7 +65,7 @@
             this.btnEliminar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.label12 = new System.Windows.Forms.Label();
             this.txtTotalPagar = new System.Windows.Forms.TextBox();
-            this.iconButton1 = new FontAwesome.Sharp.IconButton();
+            this.btnRegistrar = new FontAwesome.Sharp.IconButton();
             this.btnAgregar = new FontAwesome.Sharp.IconButton();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -467,20 +467,21 @@
             this.txtTotalPagar.Size = new System.Drawing.Size(170, 22);
             this.txtTotalPagar.TabIndex = 34;
             // 
-            // iconButton1
+            // btnRegistrar
             // 
-            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.Check;
-            this.iconButton1.IconColor = System.Drawing.Color.MediumBlue;
-            this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton1.IconSize = 35;
-            this.iconButton1.Location = new System.Drawing.Point(1123, 620);
-            this.iconButton1.Name = "iconButton1";
-            this.iconButton1.Size = new System.Drawing.Size(170, 38);
-            this.iconButton1.TabIndex = 36;
-            this.iconButton1.Text = "Registrar";
-            this.iconButton1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.iconButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.iconButton1.UseVisualStyleBackColor = true;
+            this.btnRegistrar.IconChar = FontAwesome.Sharp.IconChar.Check;
+            this.btnRegistrar.IconColor = System.Drawing.Color.MediumBlue;
+            this.btnRegistrar.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnRegistrar.IconSize = 35;
+            this.btnRegistrar.Location = new System.Drawing.Point(1123, 620);
+            this.btnRegistrar.Name = "btnRegistrar";
+            this.btnRegistrar.Size = new System.Drawing.Size(170, 38);
+            this.btnRegistrar.TabIndex = 36;
+            this.btnRegistrar.Text = "Registrar";
+            this.btnRegistrar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnRegistrar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnRegistrar.UseVisualStyleBackColor = true;
+            this.btnRegistrar.Click += new System.EventHandler(this.btnRegistrar_Click);
             // 
             // btnAgregar
             // 
@@ -502,7 +503,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1393, 723);
-            this.Controls.Add(this.iconButton1);
+            this.Controls.Add(this.btnRegistrar);
             this.Controls.Add(this.txtTotalPagar);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.btnAgregar);
@@ -568,6 +569,6 @@
         private FontAwesome.Sharp.IconButton btnAgregar;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox txtTotalPagar;
-        private FontAwesome.Sharp.IconButton iconButton1;
+        private FontAwesome.Sharp.IconButton btnRegistrar;
     }
 }
