@@ -149,7 +149,7 @@ namespace CapaPresentacion
             {
                 //string Mensaje = string.Empty;
 
-                bool Respuesta = new CN_Venta().RestarStock(
+                /*bool Respuesta = new CN_Venta().RestarStock(
                     Convert.ToInt32(txtIdProducto.Text),
                     Convert.ToInt32(nudCantidad.Value.ToString())
                     );
@@ -167,19 +167,20 @@ namespace CapaPresentacion
                     calcularTotal();
                     limpiarProducto();
                     txtCodProducto.Select();
-                }
+                }*/
 
-                /*dgvData.Rows.Add(new object[] {
+                dgvData.Rows.Add(new object[] {
                         txtIdProducto.Text,
                         txtNomProducto.Text,
                         precio.ToString("0.00"),
                         nudCantidad.Value.ToString(),
+                        //nudCantidad.Value,
                         (nudCantidad.Value * precio).ToString("0.00")
                 });
 
                 calcularTotal();
                 limpiarProducto();
-                txtCodProducto.Select();*/
+                txtCodProducto.Select();
 
             }
 
@@ -201,7 +202,7 @@ namespace CapaPresentacion
 
         private void limpiarProducto()
         {
-            txtIdProducto.Text = "0";
+
             txtCodProducto.Text = "";
             txtNomProducto.Text = "";
             txtPrecio.Text = "";
@@ -364,8 +365,9 @@ namespace CapaPresentacion
 
             //Código para solucionar 
 
-            /*int IdProducto = Convert.ToInt32(txtIdProducto.Text);
+            int IdProducto = Convert.ToInt32(txtIdProducto.Text);
             int Cantidad = Convert.ToInt32(nudCantidad.Value.ToString());
+
 
             bool Resultado = new CN_Venta().RestarStock(IdProducto, Cantidad);
             
@@ -374,7 +376,8 @@ namespace CapaPresentacion
                 DataTable Detalle_Venta = new DataTable();
 
                 Detalle_Venta.Columns.Add("IdProducto", typeof(string));
-                Detalle_Venta.Columns.Add("PrecioVenta", typeof(decimal));
+                //Detalle_Venta.Columns.Add("PrecioVenta", typeof(decimal));
+                Detalle_Venta.Columns.Add("Precio", typeof(decimal));
                 Detalle_Venta.Columns.Add("Cantidad", typeof(int));
                 Detalle_Venta.Columns.Add("SubTotal", typeof(decimal));
 
@@ -435,11 +438,11 @@ namespace CapaPresentacion
             else
             {
                 MessageBox.Show("No se pudo disminuir el stock del producto", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }*/
+            }
 
             //Fin Código
 
-            DataTable Detalle_Venta = new DataTable();
+            /*DataTable Detalle_Venta = new DataTable();
 
             Detalle_Venta.Columns.Add("IdProducto", typeof(string));
             Detalle_Venta.Columns.Add("PrecioVenta", typeof(decimal));
@@ -498,7 +501,7 @@ namespace CapaPresentacion
             else
             {
                 MessageBox.Show(Mensaje, "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
+            }*/
 
 
         }
