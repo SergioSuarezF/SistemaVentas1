@@ -2,11 +2,13 @@
 using CapaNegocio;
 using CapaPresentacion.Modales;
 using CapaPresentacion.Utilidades;
+using DocumentFormat.OpenXml.Bibliography;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -146,6 +148,7 @@ namespace CapaPresentacion
             if (!producto_existe)
             {
                 //string Mensaje = string.Empty;
+
                 bool Respuesta = new CN_Venta().RestarStock(
                     Convert.ToInt32(txtIdProducto.Text),
                     Convert.ToInt32(nudCantidad.Value.ToString())
@@ -165,6 +168,18 @@ namespace CapaPresentacion
                     limpiarProducto();
                     txtCodProducto.Select();
                 }
+
+                /*dgvData.Rows.Add(new object[] {
+                        txtIdProducto.Text,
+                        txtNomProducto.Text,
+                        precio.ToString("0.00"),
+                        nudCantidad.Value.ToString(),
+                        (nudCantidad.Value * precio).ToString("0.00")
+                });
+
+                calcularTotal();
+                limpiarProducto();
+                txtCodProducto.Select();*/
 
             }
 
@@ -347,6 +362,83 @@ namespace CapaPresentacion
                 return;
             }
 
+            //Código para solucionar 
+
+            /*int IdProducto = Convert.ToInt32(txtIdProducto.Text);
+            int Cantidad = Convert.ToInt32(nudCantidad.Value.ToString());
+
+            bool Resultado = new CN_Venta().RestarStock(IdProducto, Cantidad);
+            
+            if (Resultado)
+            {
+                DataTable Detalle_Venta = new DataTable();
+
+                Detalle_Venta.Columns.Add("IdProducto", typeof(string));
+                Detalle_Venta.Columns.Add("PrecioVenta", typeof(decimal));
+                Detalle_Venta.Columns.Add("Cantidad", typeof(int));
+                Detalle_Venta.Columns.Add("SubTotal", typeof(decimal));
+
+                foreach (DataGridViewRow row in dgvData.Rows)
+                {
+                    Detalle_Venta.Rows.Add(new object[]
+                    {
+                    row.Cells["IdProducto"].Value.ToString(),
+                    row.Cells["Precio"].Value.ToString(),
+                    row.Cells["Cantidad"].Value.ToString(),
+                    row.Cells["SubTotal"].Value.ToString()
+                    });
+                }
+
+                int IdCorrelativo = new CN_Venta().ObtenerCorrelativo();
+                string numeroDocumento = string.Format("{0:0000000000}", IdCorrelativo);
+                calcVuelto();
+
+                Venta oVenta = new Venta()
+                {
+                    oUsuario = new Usuario() { IdUsuario = _usuario.IdUsuario },
+                    TipoDocumento = ((OpcionCombo)cbTipoDoc.SelectedItem).Texto,
+                    NumeroDocumento = numeroDocumento,
+                    DocumentoCliente = txtDocCliente.Text,
+                    NombreCliente = txtNomCliente.Text,
+                    MontoPago = Convert.ToDecimal(txtPagoCon.Text),
+                    MontoCambio = Convert.ToDecimal(txtCambio.Text),
+                    MontoTotal = Convert.ToDecimal(txtTotalPagar.Text)
+
+                };
+
+                string Mensaje = string.Empty;
+                bool Respuesta = new CN_Venta().Registrar(oVenta, Detalle_Venta, out Mensaje);
+
+                if (Respuesta)
+                {
+                    var Result = MessageBox.Show("El número de venta ha sido generado:\n" + numeroDocumento + "\n\n¿Desea copiar al portapapeles?", "Mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                    //El número de compra ha sido generado:\n" + numeroDocumento + "\n\n¿Desea copiar al portapapeles?", "Mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Information
+                    if (Result == DialogResult.Yes)
+                    {
+                        Clipboard.SetText(numeroDocumento);
+                    }
+
+                    txtDocCliente.Text = "";
+                    txtNomCliente.Text = "";
+                    dgvData.Rows.Clear();
+                    txtPagoCon.Text = "";
+                    txtCambio.Text = "";
+
+
+
+                }
+                else
+                {
+                    MessageBox.Show(Mensaje, "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No se pudo disminuir el stock del producto", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }*/
+
+            //Fin Código
+
             DataTable Detalle_Venta = new DataTable();
 
             Detalle_Venta.Columns.Add("IdProducto", typeof(string));
@@ -399,6 +491,9 @@ namespace CapaPresentacion
                 dgvData.Rows.Clear();
                 txtPagoCon.Text = "";
                 txtCambio.Text = "";
+
+
+
             }
             else
             {
@@ -407,5 +502,7 @@ namespace CapaPresentacion
 
 
         }
+
+
     }
 }

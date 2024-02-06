@@ -29,6 +29,11 @@ namespace CapaPresentacion
             InitializeComponent();
         }
 
+        private void FrmDetalleCompra_Load(object sender, EventArgs e)
+        {
+            txtBuscarDoc.Select();
+        }
+
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             Compra oCompra = new CN_Compra().ObtenerCompra(txtBuscarDoc.Text);
@@ -157,5 +162,7 @@ namespace CapaPresentacion
                 }
             }
         }
+
+        
     }
 }
