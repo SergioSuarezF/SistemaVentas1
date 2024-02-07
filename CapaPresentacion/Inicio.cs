@@ -125,14 +125,24 @@ namespace CapaPresentacion
             AbrirFormulario((IconMenuItem)sender, new FrmProveedores());
         }
 
-        private void menureportes_Click(object sender, EventArgs e)
+        /*private void menureportes_Click(object sender, EventArgs e)
         {
             AbrirFormulario((IconMenuItem)sender, new FrmReportes());
-        }
+        }*/
 
         private void subMenuNegocio_Click(object sender, EventArgs e)
         {
             AbrirFormulario(menumantenedor, new FrmNegocio());
+        }
+
+        private void SubMenuReporteCompras_Click(object sender, EventArgs e)
+        {
+            AbrirFormulario(menureportes, new FrmReporteCompras());
+        }
+
+        private void SubMenuReporteVentas_Click(object sender, EventArgs e)
+        {
+            AbrirFormulario(menureportes, new FrmReporteVentas());
         }
     }
 }
