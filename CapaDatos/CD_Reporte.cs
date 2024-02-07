@@ -69,7 +69,7 @@ namespace CapaDatos
         {
             List<ReporteVenta> lista = new List<ReporteVenta>();
 
-            using (SqlConnection oConexion = new SqlConnection())
+            using (SqlConnection oConexion = new SqlConnection(Conexion.cadena))
             {
                 try
                 {
@@ -78,6 +78,8 @@ namespace CapaDatos
                     cmd.Parameters.AddWithValue("FechaInicio", FechaInicio);
                     cmd.Parameters.AddWithValue("FechaFin", FechaFin);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    oConexion.Open();
 
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
