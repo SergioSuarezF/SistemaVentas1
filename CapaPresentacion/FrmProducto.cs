@@ -11,6 +11,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+//using System;
+//using System.Windows.Forms;
+using System.IO;
+using Excel = Microsoft.Office.Interop.Excel;
+//using Microsoft.Office.Interop.Excel;
+using ExcelDataReader;
+using DocumentFormat.OpenXml.Office2010.Excel;
+using System.Data.SqlClient;
+using SpreadsheetLight;
 
 
 namespace CapaPresentacion
@@ -338,5 +347,62 @@ namespace CapaPresentacion
 
             }
         }
+
+        /*private void btnCargarExcel_Click(object sender, EventArgs e)
+        {
+            Microsoft.Office.Interop.Excel.Application xlApp;
+            Microsoft.Office.Interop.Excel.Workbook xlWorkbook;
+            Microsoft.Office.Interop.Excel.Worksheet xlWorksheet;
+            Microsoft.Office.Interop.Excel.Range xlRange;
+
+            int xlRow;
+            string strFileName;
+
+            OpenFileDialog openFD = new OpenFileDialog();
+            //openFD.Filter = "Excel Office | *.xlsx";
+            openFD.Filter = "Excel Office | *.xls; *xlsx";
+            openFD.ShowDialog();
+
+            strFileName = openFD.FileName;
+
+            if (strFileName != "")
+            {
+                xlApp = new Microsoft.Office.Interop.Excel.Application();
+                xlWorkbook = xlApp.Workbooks.Open(strFileName);
+                xlWorksheet = xlWorkbook.Worksheets["Informe Productos"];
+                xlRange = xlWorksheet.UsedRange;
+
+                int i = 0;
+
+                for (xlRow = 2; xlRow <= xlRange.Rows.Count; xlRow++)
+                {
+                    i++;
+
+                    dgvData.Rows.Add(
+                        i,
+
+                        //CORRECTO
+                        xlRange.Cells[xlRow, 1].Text,
+                        xlRange.Cells[xlRow, 2].Text,
+                        xlRange.Cells[xlRow, 3].Text,
+                        xlRange.Cells[xlRow, 4].Text,
+                        xlRange.Cells[xlRow, 5].Text,
+                        xlRange.Cells[xlRow, 6].Text,
+                        xlRange.Cells[xlRow, 7].Text,
+                        xlRange.Cells[xlRow, 8].Text
+
+                    );
+                }
+
+                xlWorkbook.Close();
+                xlApp.Quit();
+
+            }
+            else
+            {
+                MessageBox.Show("No se pudo importar los datos!", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+
+        }*/
     }
 }

@@ -173,7 +173,17 @@ namespace CapaDatos
             return Respuesta;
         }
 
+        //Para cargar excel
 
+        /*public static int AgregarProductoExcel(Producto producto)
+        {
+            int respuesta = 0;
+
+            using (SqlConnection oConexion = new SqlConnection(Conexion.cadena))
+            {
+                string query = ""
+            }
+        }*/
 
     }
 }

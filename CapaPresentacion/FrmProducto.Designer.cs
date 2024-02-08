@@ -66,7 +66,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnExcel = new System.Windows.Forms.Button();
-            this.btnCargarExcel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.SuspendLayout();
             // 
@@ -494,27 +493,11 @@
             this.btnExcel.UseVisualStyleBackColor = false;
             this.btnExcel.Click += new System.EventHandler(this.btnExcel_Click);
             // 
-            // btnCargarExcel
-            // 
-            this.btnCargarExcel.BackColor = System.Drawing.Color.YellowGreen;
-            this.btnCargarExcel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.btnCargarExcel.FlatAppearance.BorderSize = 0;
-            this.btnCargarExcel.Image = global::CapaPresentacion.Properties.Resources.excel;
-            this.btnCargarExcel.Location = new System.Drawing.Point(530, 53);
-            this.btnCargarExcel.Name = "btnCargarExcel";
-            this.btnCargarExcel.Size = new System.Drawing.Size(146, 42);
-            this.btnCargarExcel.TabIndex = 59;
-            this.btnCargarExcel.Text = "Cargar Excel";
-            this.btnCargarExcel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCargarExcel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnCargarExcel.UseVisualStyleBackColor = false;
-            // 
             // FrmProducto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1393, 723);
-            this.Controls.Add(this.btnCargarExcel);
             this.Controls.Add(this.btnExcel);
             this.Controls.Add(this.txtIndice);
             this.Controls.Add(this.btnLimpiarBuscador);
@@ -587,6 +570,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn PrecioVenta;
         private System.Windows.Forms.DataGridViewTextBoxColumn EstadoValor;
         private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
-        private System.Windows.Forms.Button btnCargarExcel;
     }
 }
